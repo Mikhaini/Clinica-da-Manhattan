@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login - Clínica Manhattan</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header><a href="index.html"><strong>🦷 Clínica Manhattan</strong></a></header>
+
+    <form onsubmit="entrar(event)">
+        <h2>Entrar</h2>
+        <input id="l-email" type="email" placeholder="E-mail" required>
+        <input id="l-senha" type="password" placeholder="Senha" required>
+        <button class="btn">Entrar</button>
+    </form>
+
+    <form onsubmit="cadastrar(event)">
+        <h2>Criar conta</h2>
+        <input id="c-nome" type="text" placeholder="Nome completo" required>
+        <input id="c-email" type="email" placeholder="E-mail" required>
+        <input id="c-senha" type="password" placeholder="Senha" minlength="4" required>
+        <button class="btn">Cadastrar</button>
+    </form>
+
+    <script src="js/auth.js"></script>
+</body>
+
+</html>
