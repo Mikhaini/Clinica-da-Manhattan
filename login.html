@@ -9,24 +9,51 @@
 </head>
 
 <body>
-    <header><a href="index.html"><strong>🦷 Clínica Manhattan</strong></a></header>
+    <header>
+        <a href="index.html"><strong>🦷 Clínica Manhattan</strong></a>
+        <nav><a href="index.html">← Voltar</a></nav>
+    </header>
 
-    <form onsubmit="entrar(event)">
-        <h2>Entrar</h2>
-        <input id="l-email" type="email" placeholder="E-mail" required>
-        <input id="l-senha" type="password" placeholder="Senha" required>
-        <button class="btn">Entrar</button>
-    </form>
+    <main class="auth-wrap">
+        <div class="auth-box">
+            <h2>Bem-vindo(a)</h2>
+            <p class="sub">Acesse ou crie sua conta para continuar.</p>
 
-    <form onsubmit="cadastrar(event)">
-        <h2>Criar conta</h2>
-        <input id="c-nome" type="text" placeholder="Nome completo" required>
-        <input id="c-email" type="email" placeholder="E-mail" required>
-        <input id="c-senha" type="password" placeholder="Senha" minlength="4" required>
-        <button class="btn">Cadastrar</button>
-    </form>
+            <div class="tabs">
+                <button type="button" id="tab-login" class="ativo" onclick="mostrar('login')">Entrar</button>
+                <button type="button" id="tab-cadastro" onclick="mostrar('cadastro')">Criar conta</button>
+            </div>
+
+            <form id="form-login" onsubmit="entrar(event)">
+                <label for="l-email">E-mail</label>
+                <input id="l-email" type="email" placeholder="voce@email.com" required>
+                <label for="l-senha">Senha</label>
+                <input id="l-senha" type="password" placeholder="Sua senha" required>
+                <button class="btn btn-block">Entrar</button>
+            </form>
+
+            <form id="form-cadastro" class="oculto" onsubmit="cadastrar(event)">
+                <label for="c-nome">Nome completo</label>
+                <input id="c-nome" type="text" placeholder="Seu nome" required>
+                <label for="c-email">E-mail</label>
+                <input id="c-email" type="email" placeholder="voce@email.com" required>
+                <label for="c-senha">Senha</label>
+                <input id="c-senha" type="password" placeholder="Mínimo 4 caracteres" minlength="4" required>
+                <button class="btn btn-block">Cadastrar</button>
+            </form>
+        </div>
+    </main>
 
     <script src="js/auth.js"></script>
+    <script>
+        function mostrar(aba) {
+            const login = aba === 'login';
+            document.getElementById('form-login').classList.toggle('oculto', !login);
+            document.getElementById('form-cadastro').classList.toggle('oculto', login);
+            document.getElementById('tab-login').classList.toggle('ativo', login);
+            document.getElementById('tab-cadastro').classList.toggle('ativo', !login);
+        }
+    </script>
 </body>
 
 </html>
