@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Painel - Clínica Manhattan</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+
+<body>
+    <header>
+        <strong>🦷 Painel da Clínica</strong>
+        <nav><span id="usuario"></span><a href="#" onclick="sair()">Sair</a></nav>
+    </header>
+
+    <div class="container">
+        <div class="cards">
+            <div class="card">
+                <h3 id="total-pacientes">0</h3>
+                <p>Pacientes</p>
+            </div>
+            <div class="card">
+                <h3 id="total-consultas">0</h3>
+                <p>Consultas agendadas</p>
+            </div>
+        </div>
+
+        <h2>Cadastrar paciente</h2>
+        <form onsubmit="addPaciente(event)">
+            <input id="p-nome" placeholder="Nome do paciente" required>
+            <input id="p-tel" placeholder="Telefone" required>
+            <button class="btn">Salvar paciente</button>
+        </form>
+
+        <h2>Agendar consulta</h2>
+        <form onsubmit="addConsulta(event)">
+            <select id="a-paciente" required></select>
+            <input id="a-data" type="datetime-local" required>
+            <input id="a-dentista" placeholder="Dentista" required>
+            <button class="btn">Agendar</button>
+        </form>
+
+        <h2>Consultas</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>Paciente</th>
+                    <th>Data/Hora</th>
+                    <th>Dentista</th>
+                </tr>
+            </thead>
+            <tbody id="lista-consultas"></tbody>
+        </table>
+    </div>
+
+    <script src="js/sistema.js"></script>
+</body>
+
+</html>
