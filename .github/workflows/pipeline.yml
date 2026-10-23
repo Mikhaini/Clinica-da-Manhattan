@@ -7,7 +7,7 @@ jobs:
  teste:
   runs-on: ubuntu-latest
 
-  step:
+  steps:
   - name: Clone
     uses: actions/checkout@v4
 
