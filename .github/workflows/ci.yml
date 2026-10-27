@@ -1,0 +1,44 @@
+name: CI
+
+on:
+  push:
+    branches: ["**"]
+  pull_request:
+    branches: [main, develop]
+
+permissions:
+  contents: read
+
+jobs:
+  verificar-integridade:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Arquivos essenciais existem
+        run: |
+          for f in index.html login.html sistema.html css/style.css js/auth.js js/sistema.js README.md .github/CODEOWNERS; do
+            if [ ! -f "$f" ]; then
+              echo "::error::Arquivo essencial ausente: $f"
+              exit 1
+            fi
+          done
+          echo "Todos os arquivos essenciais estão presentes."
+
+      - name: JavaScript sem erro de sintaxe
+        run: |
+          node --check js/auth.js
+          node --check js/sistema.js
+
+      - name: HTML referencia os arquivos certos
+        run: |
+          grep -q 'css/style.css' index.html
+          grep -q 'js/auth.js' login.html
+          grep -q 'js/sistema.js' sistema.html
+
+      - name: Bloqueia código perigoso
+        run: |
+          if grep -rnE "eval\(|document\.write\(" js/ ; then
+            echo "::error::Uso de eval() ou document.write() não é permitido."
+            exit 1
+          fi
