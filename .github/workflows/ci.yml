@@ -29,3 +29,16 @@ jobs:
         run: |
           node --check js/auth.js
           node --check js/sistema.js
+
+      - name: HTML referencia os arquivos certos
+        run: |
+          grep -q 'css/style.css' index.html
+          grep -q 'js/auth.js' login.html
+          grep -q 'js/sistema.js' sistema.html
+
+      - name: Bloqueia código perigoso
+        run: |
+          if grep -rnE "eval\(|document\.write\(" js/ ; then
+            echo "::error::Uso de eval() ou document.write() não é permitido."
+            exit 1
+          fi
